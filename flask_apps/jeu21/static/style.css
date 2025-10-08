@@ -1,0 +1,79 @@
+body { 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+    text-align: center; 
+    margin-top: 40px; 
+    background-color: #f0f2f5; 
+    color: #333; 
+}
+
+.container { 
+    max-width: 450px; 
+    margin: auto; 
+    background: white; 
+    padding: 25px; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+}
+
+h1 { 
+    color: #1c1e21; 
+}
+
+h2 { 
+    color: #606770; 
+    border-top: 1px solid #ddd; 
+    padding-top: 15px; 
+    margin-top: 20px; 
+    font-size: 1.2em; 
+}
+
+.display { 
+    font-size: 2.5em; 
+    margin: 10px 0 20px 0; 
+    color: #007BFF; 
+    font-weight: bold; 
+}
+
+button { 
+    font-size: 1.1em; 
+    padding: 12px 24px; 
+    margin: 8px; 
+    cursor: pointer; 
+    border: none; 
+    border-radius: 6px; 
+    transition: background-color 0.2s; 
+}
+
+#btn-throw { 
+    background-color: #42b72a; 
+    color: white; 
+}
+
+#btn-throw:hover { 
+    background-color: #36a420; 
+}
+
+#btn-stop { 
+    background-color: #fa3e3e; 
+    color: white; 
+}
+
+#btn-stop:hover { 
+    background-color: #e03030; 
+}
+
+#btn-new-game { 
+    background-color: #001F3D; 
+    color: #fff; 
+    width: 100%; 
+    margin-top: 20px;
+}
+
+#btn-new-game:hover { 
+    background-color: #005EA0; 
+}
+
+button:disabled { 
+    background-color: #ccd0d5; 
+    cursor: not-allowed; 
+}

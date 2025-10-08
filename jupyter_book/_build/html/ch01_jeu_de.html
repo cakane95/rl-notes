@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Chapitre 1 : Le Jeu du Dé &#8212; My sample book</title>
+    <title>Chapitre 1 : Les Problèmes de Décision de Markov (PDM) &#8212; My sample book</title>
   
   
   
@@ -60,7 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'ch01_jeu_de';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Welcome to your Jupyter Book" href="intro.html" />
+    <link rel="next" title="Références" href="references.html" />
+    <link rel="prev" title="Introduction" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -174,12 +175,13 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Welcome to your Jupyter Book
+                    Introduction
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapitre 1 : Le Jeu du Dé</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapitre 1 : Les Problèmes de Décision de Markov (PDM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">Références</a></li>
 </ul>
 
     </div>
@@ -365,7 +367,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Chapitre 1 : Le Jeu du Dé</h1>
+    <h1>Chapitre 1 : Les Problèmes de Décision de Markov (PDM)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -375,6 +377,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#une-partie-de-ludo-pour-commencer">Une partie de Ludo pour commencer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#l-apprentissage-par-renforcement-a-la-rescousse">L’Apprentissage par Renforcement à la rescousse</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-problemes-de-decision-de-markov-pdm-4-pilliers">Les Problèmes de Décision de Markov (PDM) : 4 Pilliers</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-pratique">Application pratique</a></li>
 </ul>
             </nav>
@@ -387,13 +392,40 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="chapitre-1-le-jeu-du-de">
-<h1>Chapitre 1 : Le Jeu du Dé<a class="headerlink" href="#chapitre-1-le-jeu-du-de" title="Link to this heading">#</a></h1>
-<p>Ceci est le premier exemple du cours, le jeu “21-avec-un-dé”. C’est un problème de décision séquentielle simple où à chaque tour, nous devons choisir entre deux actions : lancer le dé ou s’arrêter.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="chapitre-1-les-problemes-de-decision-de-markov-pdm">
+<h1>Chapitre 1 : Les Problèmes de Décision de Markov (PDM)<a class="headerlink" href="#chapitre-1-les-problemes-de-decision-de-markov-pdm" title="Link to this heading">#</a></h1>
+<section id="une-partie-de-ludo-pour-commencer">
+<h2>Une partie de Ludo pour commencer<a class="headerlink" href="#une-partie-de-ludo-pour-commencer" title="Link to this heading">#</a></h2>
+<p>Imaginons une partie de Ludo. À chaque tour, vous lancez un dé. Le résultat obtenu vous offre plusieurs options (ou <strong>actions</strong>) :</p>
+<ul class="simple">
+<li><p>Sortir un nouveau pion si vous faites un <code class="docutils literal notranslate"><span class="pre">6</span></code> ;</p></li>
+<li><p>Avancer un pion déjà en jeu ;</p></li>
+<li><p>Capturer le pion d’un adversaire.</p></li>
+</ul>
+<p>Pour décider du meilleur coup, vous observez la disposition des pions sur le plateau, c’est-à-dire l’<strong>état</strong> actuel du jeu. Le but n’est pas seulement de choisir le coup qui vous fait avancer le plus vite maintenant, mais celui qui maximise vos chances de gagner sur le long terme. Chaque action modifie la configuration du jeu, le faisant passer à un nouvel état (disposition des pions sur le plateau).</p>
+<a class="bg-transparent mb-1 reference internal image-reference" href="_images/ludo.png"><img alt="ludo" class="bg-transparent mb-1 align-center" src="_images/ludo.png" style="width: 300px;" />
+</a>
+<p>Comme vous pouvez le voir, jouer au Ludo implique une suite de décisions dont les conséquences se mesurent à la fois immédiatement et sur la durée de la partie. Formellement, on parle de <strong>problème de prise de décision séquentielle</strong>. Pour être plus précis, il s’agit d’un problème de décision dans un environnement <strong>incertain</strong>, car vous ne contrôlez ni le résultat du dé, ni les actions de vos adversaires.</p>
+</section>
+<hr class="docutils" />
+<section id="l-apprentissage-par-renforcement-a-la-rescousse">
+<h2>L’Apprentissage par Renforcement à la rescousse<a class="headerlink" href="#l-apprentissage-par-renforcement-a-la-rescousse" title="Link to this heading">#</a></h2>
+<p>C’est exactement ce type de problème que l’apprentissage par renforcement (RL) cherche à résoudre. L’objectif est qu’un <strong>agent</strong> (ici, le joueur de Ludo) apprenne une stratégie ou politique, c’est-à-dire une manière de se comporter, pour atteindre son but (gagner la partie).</p>
+<p>Pour modéliser formellement ce genre de situation, le RL s’appuie sur un outil mathématique fondamental : les <strong>Processus Décisionnels de Markov</strong>, ou <em>Markov Decision Processes (MDPs)</em> en anglais.</p>
+<p>Dans ce chapitre, nous allons détailler les composantes d’un PDM en nous aidant d’un jeu plus simple : le “21 avec un dé”.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Pour bien saisir les concepts qui suivront, nous vous invitons à tester le jeu dès maintenant.</p>
+<p><a href="https://www.google.com/url?sa=E&source=gmail&q=http://127.0.0.1:5000" target="_blank" rel="noopener noreferrer">➡️ Jouer au “21 avec un dé”</a></p>
+</div>
+</section>
+<section id="les-problemes-de-decision-de-markov-pdm-4-pilliers">
+<h2>Les Problèmes de Décision de Markov (PDM) : 4 Pilliers<a class="headerlink" href="#les-problemes-de-decision-de-markov-pdm-4-pilliers" title="Link to this heading">#</a></h2>
+</section>
 <section id="application-pratique">
 <h2>Application pratique<a class="headerlink" href="#application-pratique" title="Link to this heading">#</a></h2>
 <p>Pour illustrer ce concept, j’ai développé une petite application web.</p>
-<p><a class="reference external" href="http://127.0.0.1:5000">➡️ Lancer l’application du Jeu du Dé</a></p>
+<p><a href="https://www.google.com/url?sa=E&source=gmail&q=http://127.0.0.1:5000" target="_blank" rel="noopener noreferrer">➡️ Lancer l’application du Jeu du Dé</a></p>
 <p><em>(N’oubliez pas de lancer le serveur <code class="docutils literal notranslate"><span class="pre">app.py</span></code> dans un terminal pour que le lien fonctionne !)</em></p>
 </section>
 </section>
@@ -434,8 +466,17 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Welcome to your Jupyter Book</p>
+        <p class="prev-next-title">Introduction</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="references.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Références</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -453,6 +494,9 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#une-partie-de-ludo-pour-commencer">Une partie de Ludo pour commencer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#l-apprentissage-par-renforcement-a-la-rescousse">L’Apprentissage par Renforcement à la rescousse</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#les-problemes-de-decision-de-markov-pdm-4-pilliers">Les Problèmes de Décision de Markov (PDM) : 4 Pilliers</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-pratique">Application pratique</a></li>
 </ul>
   </nav></div>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Jeu du 21-avec-un-dé</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <h1>🎲 Jeu du 21-avec-un-dé</h1>
+        
+        <h2>Score Actuel</h2>
+        <div id="score-display" class="display">0</div>
+        
+        <h2>Dernière Récompense</h2>
+        <div id="reward-display" class="display">0</div>
+        
+        <div id="game-controls">
+            <button id="btn-throw">Lancer (Throw)</button>
+            <button id="btn-stop">Arrêter (Stop)</button>
+        </div>
+
+        <button id="btn-new-game">Nouvelle Partie</button>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+
+</body>
+</html>
