@@ -19,13 +19,10 @@ function updateUI(data) {
 
         feedbackArea.hidden = false;
 
-        if (data.reward === -1000) { // Le joueur a perdu
+        if (data.reward === -1000) {
             feedbackArea.textContent = `Partie terminée ! Vous avez dépassé 21.`;
-            feedbackArea.className = 'feedback-area lost';
-        } else { // Le joueur s'est arrêté à temps
-            // La récompense finale (le retour) est le score final.
+        } else {
             feedbackArea.textContent = `Partie terminée ! Votre score final (retour) est de ${data.reward}.`;
-            feedbackArea.className = 'feedback-area won';
         }
 
     } else {
@@ -58,6 +55,7 @@ btnNewGame.addEventListener('click', async () => {
         const response = await fetch(`${API_URL}/new_game`, { method: 'POST' });
         const data = await response.json();
         updateUI(data);
+        feedbackArea.hidden = true;
     } catch (error) {
         console.error("Erreur de communication:", error);
     }

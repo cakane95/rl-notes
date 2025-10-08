@@ -21,17 +21,28 @@ h1 {
 
 h2 { 
     color: #606770; 
-    border-top: 1px solid #ddd; 
-    padding-top: 15px; 
-    margin-top: 20px; 
     font-size: 1.2em; 
+    margin: 0 0 10px 0;
+    border: none;
+    padding: 0;
 }
 
 .display { 
     font-size: 2.5em; 
-    margin: 10px 0 20px 0; 
     color: #007BFF; 
     font-weight: bold; 
+}
+
+.feedback-area {
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 6px;
+    font-size: 1.1em;
+    font-weight: 500;
+    background-color: #e7f3ff; /* Bleu clair */
+    color: #004085;           /* Texte bleu foncé */
+    border: 1px solid #b8daff;   /* Bordure assortie */
+    transition: all 0.3s;
 }
 
 button { 
