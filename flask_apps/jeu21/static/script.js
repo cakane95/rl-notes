@@ -4,6 +4,7 @@ const rewardDisplay = document.getElementById('reward-display');
 const btnThrow = document.getElementById('btn-throw');
 const btnStop = document.getElementById('btn-stop');
 const btnNewGame = document.getElementById('btn-new-game');
+const feedbackArea = document.getElementById('feedback-area');
 
 const API_URL = 'http://127.0.0.1:5000';
 
@@ -15,6 +16,18 @@ function updateUI(data) {
     if (data.game_over) {
         btnThrow.disabled = true;
         btnStop.disabled = true;
+
+        feedbackArea.hidden = false;
+
+        if (data.reward === -1000) { // Le joueur a perdu
+            feedbackArea.textContent = `Partie terminée ! Vous avez dépassé 21.`;
+            feedbackArea.className = 'feedback-area lost';
+        } else { // Le joueur s'est arrêté à temps
+            // La récompense finale (le retour) est le score final.
+            feedbackArea.textContent = `Partie terminée ! Votre score final (retour) est de ${data.reward}.`;
+            feedbackArea.className = 'feedback-area won';
+        }
+
     } else {
         btnThrow.disabled = false;
         btnStop.disabled = false;
