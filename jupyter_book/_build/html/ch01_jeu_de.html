@@ -421,6 +421,24 @@ document.write(`
 </section>
 <section id="les-problemes-de-decision-de-markov-pdm-4-pilliers">
 <h2>Les Problèmes de Décision de Markov (PDM) : 4 Pilliers<a class="headerlink" href="#les-problemes-de-decision-de-markov-pdm-4-pilliers" title="Link to this heading">#</a></h2>
+<p>Maintenant que vous avez testé le jeu, analysons-le de façon intuitive. Pour rappel, le principe du jeu est simple :</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>On joue avec un dé normal à 6 faces, numérotées de 1 à 6. On le lance et il retombe ; on note le numéro sur la face supérieure ; on le relance et on ajoute le nouveau numéro de la face supérieure ; et ainsi de suite : <strong>il ne faut pas dépasser 21</strong>. Avant chaque lancer, on décide de lancer à nouveau le dé ou de s’arrêter. Si on s’arrête, notre performance est le score final ; si celui-ci dépasse <strong>21</strong>, le score final est de <strong>-1000</strong>. Le but est de faire un score final maximal.</p>
+</div>
+<p>Nous pouvons décomposer le jeu en plusieurs éléments principaux :</p>
+<ul class="simple">
+<li><p><strong>Des instants de decision (t) :</strong> Ce sont les moments où nous devons choisir une action, comme au tout début de la partie ou après un lancer de dé.</p></li>
+<li><p><strong>L’etat du jeu (s) :</strong> C’est l’information cruciale dont nous disposons pour prendre notre décision. Pour un joueur rationnel, la seule information qui compte vraiment est <strong>son score actuel</strong>. Savoir si son score est de 12 ou de 19 change radicalement la décision à prendre. Le score est donc l’état du jeu.</p></li>
+<li><p><strong>Des actions possibles (a) :</strong> À chaque instant de décision, les choix sont limités et clairs. On peut soit <span style="background-color:#42b72a; color:white; padding: 2px 6px; border-radius: 4px; font-family: monospace;">lancer</span> le dé à nouveau, soit <span style="background-color:#fa3e3e; color:white; padding: 2px 6px; border-radius: 4px; font-family: monospace;">arrêter</span> la partie pour valider son score.</p></li>
+<li><p><strong>L’évolution de l’état (P) :</strong> C’est la “règle du jeu”. Si on est dans l’état <code class="docutils literal notranslate"><span class="pre">score</span> <span class="pre">=</span> <span class="pre">5</span></code> et qu’on choisit l’action <span style="background-color:#42b72a; color:white; padding: 2px 6px; border-radius: 4px; font-family: monospace;">lancer</span>, l’état suivant sera l’un des scores {6, 7, 8, 9, 10, 11}, chacun avec une probabilité de 1/6. Si on choisit d’arrêter, le jeu se termine. Dans l’exemple ci-dessous, on voit qu’à partir de l’état <code class="docutils literal notranslate"><span class="pre">score</span> <span class="pre">=</span> <span class="pre">5</span></code> et après avoir choisi l’action <span style="background-color:#42b72a; color:white; padding: 2px 6px; border-radius: 4px; font-family: monospace;">lancer</span>, on arrive ou <strong>transitionne</strong> vers l’état <code class="docutils literal notranslate"><span class="pre">score</span> <span class="pre">=</span> <span class="pre">9</span></code>.</p></li>
+</ul>
+<a class="bg-transparent mb-1 reference internal image-reference" href="_images/dice21_transition.png"><img alt="transition" class="bg-transparent mb-1 align-center" src="_images/dice21_transition.png" style="width: 600px;" />
+</a>
+<ul class="simple">
+<li><p><strong>La fonction score (la récompense)</strong> : Chaque action a une conséquence. Dans notre implémentation, un lancer réussi nous donne une récompense égale à la valeur du dé. Si l’on dépasse 21, on reçoit une forte pénalité (-1000). Si l’on s’arrête, la récompense est notre score final.</p></li>
+<li><p><strong>L’objectif</strong> : L’objectif n’est pas juste de faire un bon coup, comme tirer un <strong>6</strong>, mais de se rapprocher autant que possible de <strong>21</strong> pour maximiser le score final sur l’ensemble de la partie.</p></li>
+</ul>
 </section>
 <section id="application-pratique">
 <h2>Application pratique<a class="headerlink" href="#application-pratique" title="Link to this heading">#</a></h2>
